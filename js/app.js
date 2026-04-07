@@ -1,6 +1,4 @@
-/* ============================
-   Navbar transparent -> solid
-============================ */
+/* ============================ Navbar transparent  ============================ */
 const header = document.querySelector(".site-header");
 window.addEventListener("scroll", () => {
   if (!header) return;
@@ -8,7 +6,7 @@ window.addEventListener("scroll", () => {
 });
 
 /* ============================
-   Hero-only overlay visibility
+   Hero only overlay visibility
 ============================ */
 const heroSection = document.querySelector(".section-hero");
 const heroSymbols = document.getElementById("heroSymbols");
@@ -42,7 +40,7 @@ const revealObserver = new IntersectionObserver(
 revealItems.forEach((el) => revealObserver.observe(el));
 
 /* ============================
-   Floating symbols (subtle random drift)
+   Floating symbols - random drift
 ============================ */
 const symbols = document.querySelectorAll(".float-symbol");
 symbols.forEach((el) => {
@@ -60,7 +58,7 @@ symbols.forEach((el) => {
 
 
 /* ============================
-   Particle Background (FAST: spatial grid)
+   Particle Background 
 ============================ */
 const canvas = document.getElementById("particleCanvas");
 const ctx = canvas.getContext("2d");
@@ -74,12 +72,12 @@ const baseConfig = {
   particleMinSize: 0.6,
   particleMaxSize: 2.4,
   lineOpacity: 0.08,
-  baseSpeed: 0.24,
+  baseSpeed: 0.58,
   pulseSpeed: 0.008,
-  // cap hard to prevent huge-screen overload
+  // cap hard to prevent huge screen overload
   minParticles: 90,
   maxParticles: 150,
-  densityFactor: 14000 // higher = fewer particles
+  densityFactor: 14000 // higher means fewer particles
 };
 
 const colors = [
@@ -141,20 +139,23 @@ class Particle {
     this.glowIntensity = 0.3 + Math.random() * 0.5;
   }
 
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
+  update(dt) {
+  const step = dt * 60; // keeps the speed values tuned for ~60fps
 
-    if (this.x < -50) this.x = width + 50;
-    if (this.x > width + 50) this.x = -50;
-    if (this.y < -50) this.y = height + 50;
-    if (this.y > height + 50) this.y = -50;
+  this.x += this.vx * step;
+  this.y += this.vy * step;
 
-    this.pulsePhase += this.pulseSpeed;
-    const pulse = Math.sin(this.pulsePhase);
-    this.size = this.baseSize * (0.8 + pulse * 0.3);
-    this.opacity = this.baseOpacity * (0.7 + pulse * 0.3);
-  }
+  if (this.x < -50) this.x = width + 50;
+  if (this.x > width + 50) this.x = -50;
+  if (this.y < -50) this.y = height + 50;
+  if (this.y > height + 50) this.y = -50;
+
+  this.pulsePhase += this.pulseSpeed * step;
+
+  const pulse = Math.sin(this.pulsePhase);
+  this.size = this.baseSize * (0.8 + pulse * 0.3);
+  this.opacity = this.baseOpacity * (0.7 + pulse * 0.3);
+}
 
   draw() {
     const outer = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 8);
@@ -248,19 +249,34 @@ function initParticles() {
   particles = Array.from({ length: cfg.particleCount }, () => new Particle(cfg));
 }
 
-function animate() {
+let lastTime = performance.now();
+
+function animate(now = performance.now()) {
+  // 1) Delta time seconds since last frame, clamped to avoid big jumps
+  const dt = Math.min(0.033, (now - lastTime) / 1000);
+  lastTime = now;
+
+  // 2) Compute responsive config (distance, particle count etc.)
   const cfg = getResponsiveConfig();
 
+  // 3) Keep particles synced with the latest config
+  for (const p of particles) p.cfg = cfg;
+
+  // 4) Fade the previous frame instead of hard-wiping to solid black
+  //    This keeps the "space depth" look and makes motion feel smooth.
   ctx.fillStyle = "#000000";
   ctx.fillRect(0, 0, width, height);
 
+  // 5) Draw the connecting lines first (behind particle cores)
   drawConnections(cfg);
 
+  // 6) Update + draw particles (frame-rate independent)
   for (const p of particles) {
-    p.update();
+    p.update(dt);   // IMPORTANT: your Particle.update must accept dt
     p.draw();
   }
 
+  // 7) Next frame
   requestAnimationFrame(animate);
 }
 
@@ -270,31 +286,6 @@ initParticles();
 animate();
 
 
-/* ============================
-   Timeline connect animation (scroll fill)
-============================ */
-const timeline = document.getElementById("timeline");
-const timelineFill = document.getElementById("timelineFill");
-
-function updateTimelineFill(){
-  if (!timeline || !timelineFill) return;
-
-  const rect = timeline.getBoundingClientRect();
-  const viewH = window.innerHeight;
-
-  // Progress from when timeline enters to when it leaves
-  const start = viewH * 0.75;
-  const end = viewH * 0.15;
-
-  const progress = (start - rect.top) / (rect.height + (start - end));
-  const clamped = Math.max(0, Math.min(1, progress));
-
-  timelineFill.style.height = `${clamped * 100}%`;
-}
-
-window.addEventListener("scroll", updateTimelineFill, { passive: true });
-window.addEventListener("resize", updateTimelineFill);
-updateTimelineFill();
 
 /* ============================
    Center timeline fill (rAF throttled)
@@ -328,3 +319,79 @@ window.addEventListener("scroll", () => {
 
 window.addEventListener("resize", updateTimelineCenterFill);
 updateTimelineCenterFill();
+
+
+//for cta to submit to netlify api 
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
+if (contactForm && formStatus) {
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    formStatus.textContent = "Sending...";
+
+    const formData = new FormData(contactForm);
+    const payload = {
+      name: String(formData.get("name") || ""),
+      email: String(formData.get("email") || ""),
+      message: String(formData.get("message") || ""),
+    };
+
+    try {
+      const res = await fetch("/.netlify/functions/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        formStatus.textContent = "Message sent. Thank you!";
+        contactForm.reset();
+      } else {
+        formStatus.textContent = "Failed to send. Please try again.";
+      }
+    } catch {
+      formStatus.textContent = "Network error. Please try again.";
+    }
+  });
+}
+
+
+/* ============================
+   Hero terminal typing
+============================ */
+const typeEl = document.querySelector(".term-type");
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function typeLine(el, text, speed = 26) {
+  el.textContent = "";
+  for (let i = 0; i < text.length; i++) {
+    el.textContent += text[i];
+    await sleep(speed);
+  }
+}
+
+async function runTerminalTyping() {
+  if (!typeEl) return;
+
+  // Read phrases from data attribute so HTML controls content
+  let phrases = [];
+  try {
+    phrases = JSON.parse(typeEl.getAttribute("data-type") || "[]");
+  } catch {
+    phrases = [];
+  }
+  if (!phrases.length) return;
+
+  // Type each phrase, pause, then move to next
+  for (let i = 0; i < phrases.length; i++) {
+    await typeLine(typeEl, phrases[i], 26);
+    await sleep(650);
+  }
+}
+
+runTerminalTyping();

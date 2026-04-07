@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alex Chen | Portfolio</title>
+  <title>Keenan Munsami | Portfolio</title>
 
-  <!-- Font -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
  
 
-  <!-- Your CSS -->
+  <!-- CSS Link -->
   <link rel="stylesheet" href="./dist/style.css" />
 </head>
 
-<body class="text-gray-300 relative">
+<body class="text-gray-300 min-h-screen overflow-x-hidden">
 
-  <!-- Background Layer -->
-  <div class="site-bg">
-    <canvas id="particleCanvas" aria-hidden="true"></canvas>
-    <div class="bg-ambient-glow" aria-hidden="true"></div>
+ <!-- Background Layer -->
+  <div class="site-bg pointer-events-none fixed inset-0 -z-10">
+    <canvas id="particleCanvas" aria-hidden="true" class="absolute inset-0"></canvas>
+    <div class="bg-ambient-glow absolute inset-0" aria-hidden="true"></div>
 
     <!-- Breathing glow blobs -->
     <div class="glow-blob glow-blob--cyan" aria-hidden="true"></div>
@@ -29,20 +29,21 @@
 
     <!-- Floating symbols -->
     <div id="heroSymbols" class="hero-symbols" aria-hidden="true">
-  <div class="hero-symbol" data-symbol style="top: 18%; left: 12%;">&lt;/&gt;</div>
-  <div class="hero-symbol" data-symbol style="top: 62%; left: 78%;">{ }</div>
-  <div class="hero-symbol" data-symbol style="top: 36%; left: 74%;">( )</div>
-  <div class="hero-symbol" data-symbol style="top: 28%; left: 84%;">JS</div>
-  <div class="hero-symbol" data-symbol style="top: 72%; left: 18%;">API</div>
-  <div class="hero-symbol" data-symbol style="top: 48%; left: 8%;">SQL</div>
-</div>
-
+      <div class="hero-symbol" data-symbol style="top: 18%; left: 12%;">&lt;/&gt;</div>
+      <div class="hero-symbol" data-symbol style="top: 62%; left: 78%;">{ }</div>
+      <div class="hero-symbol" data-symbol style="top: 36%; left: 74%;">( )</div>
+      <div class="hero-symbol" data-symbol style="top: 28%; left: 84%;">JS</div>
+      <div class="hero-symbol" data-symbol style="top: 72%; left: 18%;">API</div>
+      <div class="hero-symbol" data-symbol style="top: 48%; left: 8%;">SQL</div>
+    </div>
   </div>
+
+  <div class="relative z-10">
 
   <!-- Navbar -->
   <header class="site-header">
-    <div class="container flex items-center justify-between">
-      <a href="#" class="brand-mark">AC<span class="brand-dot">.</span></a>
+    <div class="site-container flex items-center justify-between">
+      <a href="#" class="brand-mark">K<span class="brand-dot">.</span></a>
 
       <nav class="nav-links hidden md:flex items-center gap-8">
         <a href="#about" class="nav-link">About</a>
@@ -59,31 +60,55 @@
   <!-- Hero -->
   <main>
     <section class="section-hero">
-      <div class="hero-content">
-        <p class="pill-status animate-in-left">Available for opportunities</p>
+      
+      <div class="hero-content hero-terminal">
 
-        <h1 class="hero-title animate-in-right">
-          Hi, I'm <span class="text-white">Alex Chen</span>
-        </h1>
+  <!-- available -->
+  <p class="pill-status animate-in-left">Available for opportunities</p>
 
-        <p class="hero-subtitle animate-in-left">
-          Crafting digital experiences that blend cutting-edge technology with elegant design.
-          Specializing in React, Node.js, and cloud architecture.
-        </p>
+  <!-- terminal frame -->
+  <div class="terminal-card animate-in-right" aria-label="Developer terminal">
+    <div class="terminal-topbar">
+      <span class="dot dot--red"></span>
+      <span class="dot dot--yellow"></span>
+      <span class="dot dot--green"></span>
+      <span class="terminal-title">portfolio.sh</span>
+    </div>
 
-        <div class="hero-actions animate-in-right">
-          <a href="#projects" class="btn-primary">View My Work</a>
-          <a href="#contact" class="btn-outline">Get in Touch</a>
-        </div>
+    <pre class="terminal-body" aria-live="polite">
+<span class="term-dim">&gt; </span><span class="term-type" data-type='["initializing portfolio…","loading developer profile…","system ready."]'></span>
 
-        <a href="#about" class="scroll-indicator" aria-label="Scroll down">
-  <span class="scroll-indicator__dot"></span>
-  <svg class="scroll-indicator__arrow" viewBox="0 0 24 24" fill="none">
-    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</a>
+<span class="term-dim">Name:</span> <span class="term-strong">Keenan Munsami</span>
+<span class="term-dim">Role:</span> Software Developer
+<span class="term-dim">Focus:</span> Business systems • Automation • Clean UI
+<span class="term-dim">Stack:</span> C# • SQL • WinForms • HTML • Tailwind • JavaScript
+    </pre>
+  </div>
 
-      </div>
+  <!-- headline -->
+  <h2 class="hero-title animate-in-left">
+    I build <span class="text-white">real-world software</span> that improves how businesses run.
+  </h2>
+
+  <p class="hero-subtitle animate-in-right">
+    From C# + SQL systems to modern front-end builds — I focus on clean architecture, usability, and performance.
+  </p>
+
+  <div class="hero-actions animate-in-left">
+    <a href="#projects" class="btn-primary">View My Work</a>
+    <a href="#contact" class="btn-outline">Get in Touch</a>
+  </div>
+
+  <!-- scroll indicator -->
+  <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+    <span class="scroll-indicator__dot"></span>
+    <svg class="scroll-indicator__arrow" viewBox="0 0 24 24" fill="none">
+      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+</div>
+      
     </section>
 
     <!-- About -->
@@ -97,7 +122,7 @@
         <div class="grid md:grid-cols-2 gap-10 mt-10">
           <div class="grid grid-cols-2 gap-6">
             <div class="card-glass stat-card">
-              <div class="stat-value">50+</div>
+              <div class="stat-value">3</div>
               <div class="stat-label">Projects Completed</div>
             </div>
             <div class="card-glass stat-card">
@@ -105,7 +130,7 @@
               <div class="stat-label">Cups of Coffee</div>
             </div>
             <div class="card-glass stat-card">
-              <div class="stat-value">5+</div>
+              <div class="stat-value">1+</div>
               <div class="stat-label">Years Experience</div>
             </div>
             <div class="card-glass stat-card">
@@ -116,7 +141,7 @@
 
           <div class="card-glass p-8">
             <p class="text-gray-400 leading-relaxed">
-              I'm a passionate full-stack developer with 5+ years of experience building scalable web applications
+              I'm a passionate full-stack developer with 1+ years of experience building scalable web applications
               and clean, user-focused interfaces. I love crafting digital products that feel fast, modern,
               and polished.
             </p>
@@ -134,222 +159,686 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="section reveal-on-scroll">
-      <div class="container text-center">
-        <p class="section-eyebrow">EXPERTISE</p>
-        <h2 class="section-title">Skills & <span class="text-cyan-400">Technologies</span></h2>
-        <p class="section-subtitle">A comprehensive toolkit built over years of crafting digital solutions</p>
+   <section id="skills" class="section reveal-on-scroll">
+  <div class="container text-center">
+    <p class="section-eyebrow">EXPERTISE</p>
+    <h2 class="section-title">Skills & <span class="text-cyan-400">Technologies</span></h2>
+    <p class="section-subtitle">A toolkit I use to build clean, scalable applications.</p>
 
-        <div class="grid md:grid-cols-3 gap-8 mt-10">
-          <div class="card-glass p-8 text-left">
-            <div class="skill-header">
-              <span class="skill-badge">Frontend</span>
-            </div>
-            <div class="skill-list">
-              <div class="skill-row">
-                <span>React</span><span class="skill-percent">95%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[95%]"></div></div>
+    <div class="skills-grid mt-12">
 
-              <div class="skill-row mt-5">
-                <span>TypeScript</span><span class="skill-percent">90%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[90%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>Next.js</span><span class="skill-percent">88%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[88%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>Tailwind CSS</span><span class="skill-percent">92%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[92%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>Framer Motion</span><span class="skill-percent">85%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[85%]"></div></div>
-            </div>
+      <!-- Frontend -->
+      <article class="card-glass skill-card text-left">
+        <div class="skill-card__top">
+          <div class="skill-icon" aria-hidden="true">
+            <!-- Globe / icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M2 12h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M12 2c3.2 2.8 5 6.2 5 10s-1.8 7.2-5 10c-3.2-2.8-5-6.2-5-10s1.8-7.2 5-10Z" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
           </div>
 
-          <div class="card-glass p-8 text-left">
-            <div class="skill-header">
-              <span class="skill-badge skill-badge--alt">Backend</span>
-            </div>
-
-            <div class="skill-list">
-              <div class="skill-row">
-                <span>Node.js</span><span class="skill-percent">90%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[90%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>Python</span><span class="skill-percent">85%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[85%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>PostgreSQL</span><span class="skill-percent">88%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[88%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>GraphQL</span><span class="skill-percent">82%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[82%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>REST APIs</span><span class="skill-percent">95%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[95%]"></div></div>
-            </div>
-          </div>
-
-          <div class="card-glass p-8 text-left">
-            <div class="skill-header">
-              <span class="skill-badge skill-badge--tools">DevOps & Tools</span>
-            </div>
-
-            <div class="skill-list">
-              <div class="skill-row">
-                <span>AWS</span><span class="skill-percent">85%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[85%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>Docker</span><span class="skill-percent">80%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[80%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>Git</span><span class="skill-percent">95%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[95%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>CI/CD</span><span class="skill-percent">82%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[82%]"></div></div>
-
-              <div class="skill-row mt-5">
-                <span>Kubernetes</span><span class="skill-percent">75%</span>
-              </div>
-              <div class="progress-track"><div class="progress-fill w-[75%]"></div></div>
-            </div>
+          <div>
+            <p class="skill-title">Front-End Development</p>
+            <p class="skill-desc">User interfaces, layouts, and smooth interactions.</p>
           </div>
         </div>
-      </div>
-    </section>
+
+        <div class="skills-tags">
+          <span class="tag-pill">HTML</span>
+          <span class="tag-pill">CSS</span>
+          <span class="tag-pill">JavaScript</span>
+          <span class="tag-pill">UI Development</span>
+          <span class="tag-pill">UX Principles</span>
+          <span class="tag-pill">Layouts & Transitions</span>
+          <span class="tag-pill">WinForms UI</span>
+        </div>
+      </article>
+
+      <!-- Backend -->
+      <article class="card-glass skill-card text-left">
+        <div class="skill-card__top">
+          <div class="skill-icon skill-icon--alt" aria-hidden="true">
+
+            <!-- Server / API icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 6.5c0-1.4 1.1-2.5 2.5-2.5h11C19.9 4 21 5.1 21 6.5v2C21 9.9 19.9 11 18.5 11h-11C5.1 11 4 9.9 4 8.5v-2Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 15.5c0-1.4 1.1-2.5 2.5-2.5h11c1.4 0 2.5 1.1 2.5 2.5v2c0 1.4-1.1 2.5-2.5 2.5h-11C5.1 22 4 20.9 4 19.5v-2Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M7 8h.01M7 17h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div>
+            <p class="skill-title">Back-End Development</p>
+            <p class="skill-desc">Logic, APIs, and application fundamentals.</p>
+          </div>
+        </div>
+
+        <div class="skills-tags">
+          <span class="tag-pill">C#</span>
+          <span class="tag-pill">Java</span>
+          <span class="tag-pill">C++</span>
+          <span class="tag-pill">VB.NET</span>
+          <span class="tag-pill">PHP</span>
+          <span class="tag-pill">CRUD Operations</span>
+          <span class="tag-pill">API Concepts</span>
+          <span class="tag-pill">Backend Basics</span>
+        </div>
+      </article>
+
+      <!-- Database Card -->
+      <article class="card-glass skill-card text-left">
+        <div class="skill-card__top">
+          <div class="skill-icon skill-icon--tools" aria-hidden="true">
+            <!-- Database icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+
+          <div>
+            <p class="skill-title">Databases & Data</p>
+            <p class="skill-desc">Storing, querying, and managing structured data.</p>
+          </div>
+        </div>
+
+        <div class="skills-tags">
+          <span class="tag-pill">SQL</span>
+          <span class="tag-pill">MySQL</span>
+          <span class="tag-pill">SQL Server</span>
+          <span class="tag-pill">Database Systems</span>
+          <span class="tag-pill">Data Management</span>
+          <span class="tag-pill">Basic Analysis</span>
+        </div>
+      </article>
+
+      <!-- Tools -->
+      <article class="card-glass skill-card text-left">
+        <div class="skill-card__top">
+          <div class="skill-icon" aria-hidden="true">
+            <!-- Tools icon -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M14 7l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M5 21l6.5-6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M13 8l-2 2 5 5 2-2a3 3 0 0 0 0-4.2l-.8-.8A3 3 0 0 0 13 8Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M7 17l-2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div>
+            <p class="skill-title">Tools & Platforms</p>
+            <p class="skill-desc">Workflow, collaboration, and project fundamentals.</p>
+          </div>
+        </div>
+
+        <div class="skills-tags">
+          <span class="tag-pill">Git</span>
+          <span class="tag-pill">GitHub</span>
+          <span class="tag-pill">SDLC</span>
+          <span class="tag-pill">App Strategies</span>
+          <span class="tag-pill">Android Development</span>
+          <span class="tag-pill">Visual Studio Code</span>
+          <span class="tag-pill">Netbeans</span>
+          <span class="tag-pill">SQL Server Management Studio</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
 
     <!-- Projects -->
-    <section id="projects" class="section reveal-on-scroll section-alt">
-      <div class="container">
-        <p class="section-eyebrow text-center">PORTFOLIO</p>
-        <h2 class="section-title text-center">Featured <span class="text-cyan-400">Projects</span></h2>
-        <p class="section-subtitle text-center">
-          A selection of projects that showcase my expertise in building scalable, user-centric applications
-        </p>
-
-        <div class="grid md:grid-cols-3 gap-8 mt-12">
-          <article class="project-card">
-            <div class="project-thumb project-thumb--dash"></div>
-            <div class="p-6">
-              <h3 class="text-white font-semibold text-lg">Quantum Dashboard</h3>
-              <p class="text-gray-400 text-sm mt-2">AI-powered analytics dashboard with real-time insights.</p>
-              <div class="mt-4 flex gap-2 flex-wrap">
-                <span class="tag-chip">React</span>
-                <span class="tag-chip">D3.js</span>
-                <span class="tag-chip">TensorFlow</span>
-                <span class="tag-chip">AWS</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb project-thumb--eco"></div>
-            <div class="p-6">
-              <h3 class="text-white font-semibold text-lg">EcoTrack Mobile</h3>
-              <p class="text-gray-400 text-sm mt-2">Sustainability tracking app with smart goals.</p>
-              <div class="mt-4 flex gap-2 flex-wrap">
-                <span class="tag-chip">React Native</span>
-                <span class="tag-chip">Node.js</span>
-                <span class="tag-chip">MongoDB</span>
-                <span class="tag-chip">GraphQL</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb project-thumb--ai"></div>
-            <div class="p-6">
-              <h3 class="text-white font-semibold text-lg">NeuralChat AI</h3>
-              <p class="text-gray-400 text-sm mt-2">Conversational AI platform with multi-language support.</p>
-              <div class="mt-4 flex gap-2 flex-wrap">
-                <span class="tag-chip">Python</span>
-                <span class="tag-chip">PyTorch</span>
-                <span class="tag-chip">FastAPI</span>
-                <span class="tag-chip">Redis</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-
-<!--Education -->
-<section id="experience" class="section reveal-on-scroll">
+   <section id="projects" class="section section-alt reveal-on-scroll">
   <div class="container">
-    <p class="section-eyebrow text-center fall-item">CAREER</p>
-    <h2 class="section-title text-center fall-item">Work <span class="text-cyan-400">Experience</span></h2>
+    <p class="section-eyebrow text-center">PORTFOLIO</p>
+    <h2 class="section-title text-center">Featured <span class="text-cyan-400">Projects</span></h2>
+    <p class="section-subtitle text-center">
+      Real systems and client work presented through premium project showcases.
+    </p>
 
-    <div class="timeline-center mt-14 fall-item" id="timelineCenter">
+    <div class="projects-grid mt-12">
+
+      <!-- 1. DDL Holdings Logistics System -->
+      <article class="project-card">
+        <div class="project-media">
+          <div class="project-slider">
+            <div class="project-slider-track">
+              <img src="images/project_pics_DDL/" alt="DDL logistics system dashboard" class="project-slide">
+              <img src="images/projects/ddl-2.jpg" alt="DDL logistics inventory screen" class="project-slide">
+              <img src="images/projects/ddl-3.jpg" alt="DDL logistics reporting screen" class="project-slide">
+            </div>
+          </div>
+
+          <div class="project-overlay"></div>
+          <div class="project-badge">IN DEVELOPMENT</div>
+        </div>
+
+        <div class="project-body">
+          <h3 class="project-title">DDL Holdings Logistics System</h3>
+
+          <p class="project-desc">
+            A logistics management platform built for real business operations, with modules for inventory,
+            customer management, invoicing, dispatch workflows, employee payslips, and financial reporting.
+          </p>
+
+          <div class="project-tags">
+            <span class="tag-chip">C#</span>
+            <span class="tag-chip">SQL</span>
+            <span class="tag-chip">WinForms</span>
+            <span class="tag-chip">Inventory</span>
+            <span class="tag-chip">Reporting</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="#contact" class="btn-outline">Request Demo</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. DDL Website -->
+      <article class="project-card">
+        <div class="project-media">
+          <div class="project-slider">
+            <div class="project-slider-track">
+              <img src="images/project_pics_DDL/DDL_Home.PNG" alt="Industrial supply website homepage" class="project-slide">
+              <img src="images/project_pics_DDL/Ddl_products.PNG" alt="Industrial supply website contact section" class="project-slide">
+              <img src="images/project_pics_DDL/Ddl_About.PNG" alt="Industrial supply website services section" class="project-slide">
+              <img src="images/project_pics_DDL/DDL_cta.PNG" alt="Industrial supply website contact section" class="project-slide">
+            </div>
+          </div>
+
+          <div class="project-overlay"></div>
+          <div class="project-badge">IN DEVELOPMENT</div>
+        </div>
+
+        <div class="project-body">
+          <h3 class="project-title">Industrial Supply Corporate Website</h3>
+
+          <p class="project-desc">
+            A responsive business website designed with modern UI patterns, animated hero effects,
+            scroll-triggered reveals, and mobile-first navigation for a premium front-end experience.
+          </p>
+
+          <div class="project-tags">
+            <span class="tag-chip">HTML5</span>
+            <span class="tag-chip">CSS</span>
+            <span class="tag-chip">Tailwind</span>
+            <span class="tag-chip">JavaScript</span>
+            <span class="tag-chip">UI/UX</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="#contact" class="btn-outline">Request Preview</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Car Workshop Efficiency Tracker -->
+      <article class="project-card">
+        <div class="project-media">
+          <div class="project-slider">
+            <div class="project-slider-track">
+              <img src="images/projects/workshop-1.jpg" alt="Workshop system dashboard" class="project-slide">
+              <img src="images/projects/workshop-2.jpg" alt="Workshop vehicle tracking screen" class="project-slide">
+              <img src="images/projects/workshop-3.jpg" alt="Workshop performance reporting screen" class="project-slide">
+            </div>
+          </div>
+
+          <div class="project-overlay"></div>
+          <div class="project-badge project-badge--done">COMPLETED</div>
+        </div>
+
+        <div class="project-body">
+          <h3 class="project-title">Car Workshop Efficiency Tracker</h3>
+
+          <p class="project-desc">
+            A C# workshop management application created to improve operational efficiency by tracking vehicle
+            movement, mechanic productivity, and workflow performance across different workshop stages.
+          </p>
+
+          <div class="project-tags">
+            <span class="tag-chip">C#</span>
+            <span class="tag-chip">Workflow</span>
+            <span class="tag-chip">Tracking</span>
+            <span class="tag-chip">Productivity</span>
+            <span class="tag-chip">Reports</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="#contact" class="btn-outline">Ask About It</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Payroll Management System -->
+      <article class="project-card">
+        <div class="project-media">
+          <div class="project-slider">
+            <div class="project-slider-track">
+              <img src="images/projects/payroll-1.jpg" alt="Payroll application employee screen" class="project-slide">
+              <img src="images/projects/payroll-2.jpg" alt="Payroll application report screen" class="project-slide">
+              <img src="images/projects/payroll-3.jpg" alt="Payroll application payslip screen" class="project-slide">
+            </div>
+          </div>
+
+          <div class="project-overlay"></div>
+          <div class="project-badge project-badge--done">COMPLETED</div>
+        </div>
+
+        <div class="project-body">
+          <h3 class="project-title">Payroll Management System</h3>
+
+          <p class="project-desc">
+            A payroll solution developed with C# and SQL to handle employee wages, deductions, report generation,
+            and formatted payslip printing, tailored to client requirements.
+          </p>
+
+          <div class="project-tags">
+            <span class="tag-chip">C#</span>
+            <span class="tag-chip">SQL</span>
+            <span class="tag-chip">Payroll</span>
+            <span class="tag-chip">Payslips</span>
+            <span class="tag-chip">Reports</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="#contact" class="btn-outline">Request Details</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Barcode Generator & Printing App -->
+      <article class="project-card">
+        <div class="project-media">
+          <div class="project-slider">
+            <div class="project-slider-track">
+              <img src="images/projects/barcode-1.jpg" alt="Barcode application dashboard" class="project-slide">
+              <img src="images/projects/barcode-2.jpg" alt="Barcode generation screen" class="project-slide">
+              <img src="images/projects/barcode-3.jpg" alt="Barcode printing screen" class="project-slide">
+            </div>
+          </div>
+
+          <div class="project-overlay"></div>
+          <div class="project-badge project-badge--done">COMPLETED</div>
+        </div>
+
+        <div class="project-body">
+          <h3 class="project-title">Barcode Generator & Printing App</h3>
+
+          <p class="project-desc">
+            A custom barcode generation and printing solution built with C# and SQL, allowing efficient creation,
+            storage, and printing of barcode records for business use.
+          </p>
+
+          <div class="project-tags">
+            <span class="tag-chip">C#</span>
+            <span class="tag-chip">SQL</span>
+            <span class="tag-chip">Barcode</span>
+            <span class="tag-chip">Printing</span>
+            <span class="tag-chip">Desktop App</span>
+          </div>
+
+          <div class="project-actions">
+            <a href="#contact" class="btn-outline">Ask About It</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+<!-- EDUCATION -->
+
+<section id="education" class="section reveal-on-scroll">
+
+  <div class="container">
+
+    <p class="section-eyebrow text-center">EDUCATION</p>
+    <h2 class="section-title text-center">
+      Education & <span class="text-cyan-400">Certificates</span>
+    </h2>
+
+    <div class="edu-listing">
+
+      <!-- FNB -->
+      <article class="edu-card">
+
+        <div class="edu-glow"></div>
+
+        <div class="edu-image">
+          <img src="images/fnb-certificate.jpg" alt="FNB App Academy Certificate">
+        </div>
+
+        <div class="edu-content">
+
+          <p class="edu-year">2025</p>
+
+          <h3 class="edu-degree">
+            Certificate in Full Stack Development
+          </h3>
+
+          <p class="edu-school">FNB App Academy</p>
+
+          <ul class="edu-modules">
+            <li>App Strategies & SDLC</li>
+            <li>GitHub Collaboration</li>
+            <li>UX Design Principles</li>
+            <li>Design Thinking</li>
+            <li>API Development</li>
+            <li>Data Processing</li>
+            <li>Backend Development</li>
+            <li>Build an API</li>
+          </ul>
+
+        </div>
+
+      </article>
+
+
+      <!-- HONOURS -->
+      <article class="edu-card">
+
+        <div class="edu-glow"></div>
+
+        <div class="edu-image">
+          <img src="images/honours-degree.jpg" alt="BSc Honours Degree">
+        </div>
+
+        <div class="edu-content">
+
+          <p class="edu-year">2022 – 2023</p>
+
+          <h3 class="edu-degree">
+            BSc Honours in Information Technology
+          </h3>
+
+          <p class="edu-school">Richfield</p>
+
+          <ul class="edu-modules">
+            <li>Advanced Software Engineering</li>
+            <li>Cyber Security</li>
+            <li>IT Strategy Governance</li>
+            <li>Human Computer Interaction</li>
+            <li>Data Mining</li>
+            <li>Research Methodology</li>
+            <li>Research Dissertation</li>
+          </ul>
+
+        </div>
+
+      </article>
+
+
+      <!-- BSC -->
+      <article class="edu-card">
+
+        <div class="edu-glow"></div>
+
+        <div class="edu-image">
+          <img src="images/bsc-degree.jpg" alt="BSc IT Degree">
+        </div>
+
+        <div class="edu-content">
+
+          <p class="edu-year">2019 – 2021</p>
+
+          <h3 class="edu-degree">
+            Bachelor of Science in Information Technology
+          </h3>
+
+          <p class="edu-school">Richfield</p>
+
+          <ul class="edu-modules">
+            <li>Programming (VB.NET, C++, Java, C#)</li>
+            <li>Web Technology (HTML, PHP, JavaScript)</li>
+            <li>Database Systems</li>
+            <li>Cloud Computing</li>
+            <li>Mobile App Development</li>
+            <li>Artificial Intelligence</li>
+            <li>IT Project Management</li>
+          </ul>
+
+        </div>
+
+      </article>
+
+
+      <!-- HIGHER CERT -->
+      <article class="edu-card">
+
+        <div class="edu-glow"></div>
+
+        <div class="edu-image">
+          <img src="images/higher-cert.jpg" alt="Higher Certificate IT">
+        </div>
+
+        <div class="edu-content">
+
+          <p class="edu-year">2018</p>
+
+          <h3 class="edu-degree">
+            Higher Certificate in Information Technology
+          </h3>
+
+          <p class="edu-school">Richfield</p>
+
+          <ul class="edu-modules">
+            <li>Help Desk Technology</li>
+            <li>Object Oriented Programming</li>
+            <li>Systems Software</li>
+            <li>E-Commerce</li>
+            <li>Information Systems</li>
+            <li>Web Technology</li>
+          </ul>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!--Experience -->
+<section id="experience" class="section section reveal-on-scroll">
+  <div class="container">
+    <p class="section-eyebrow text-center">CAREER</p>
+    <h2 class="section-title text-center">Work <span class="text-cyan-400">Experience</span></h2>
+    <p class="section-subtitle text-center">Freelance development work and professional experience.</p>
+
+    <div class="timeline-center mt-14" id="timelineCenter">
       <div class="timeline-spine">
         <div class="timeline-spine-fill" id="timelineCenterFill"></div>
       </div>
 
-      <!-- Item 1 (Left) -->
+      <!-- 1) CURRENT — DDL HOLDINGS (Left) -->
       <div class="timeline-row">
         <div class="timeline-card-wrap left">
-          <div class="card-glass timeline-card">
-            <p class="text-sm text-gray-400">2022 - Present</p>
-            <h3 class="text-white font-semibold mt-1">Senior Full-Stack Developer</h3>
-            <p class="text-gray-400 mt-3">
-              Leading development of cloud-native applications, mentoring juniors, and architecting scalable solutions.
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="tag-chip">40% performance improvement</span>
-              <span class="tag-chip">Led team of 8 engineers</span>
-              <span class="tag-chip">Introduced CI/CD pipelines</span>
+          <article class="card-glass timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-badge timeline-badge--current">CURRENT</span>
+              <span class="timeline-date">Ongoing</span>
             </div>
-          </div>
+
+            <h3 class="timeline-role">Freelance Software Developer</h3>
+            <p class="timeline-company">DDL Holdings</p>
+
+            <ul class="timeline-bullets">
+              <li>Designing and developing a logistics management system using C# and SQL (inventory, customers, invoicing, financial reports).</li>
+              <li>Implementing real-time stock tracking with low-stock alerts for supply control.</li>
+              <li>Building WinForms UIs for quotes, invoices, dispatches, and pay slips with full CRUD + reporting logic.</li>
+            </ul>
+
+            <div class="timeline-tags">
+              <span class="tag-chip">C#</span>
+              <span class="tag-chip">SQL</span>
+              <span class="tag-chip">WinForms</span>
+              <span class="tag-chip">CRUD</span>
+              <span class="tag-chip">Reporting</span>
+            </div>
+          </article>
         </div>
 
         <div class="timeline-dot"></div>
-
         <div class="timeline-card-wrap right"></div>
       </div>
 
-      <!-- Item 2 (Right) -->
+      <!-- 2) CURRENT — DDl Web Dev (Right) -->
       <div class="timeline-row">
         <div class="timeline-card-wrap left"></div>
-
         <div class="timeline-dot"></div>
 
         <div class="timeline-card-wrap right">
-          <div class="card-glass timeline-card">
-            <p class="text-sm text-gray-400">2020 - 2022</p>
-            <h3 class="text-white font-semibold mt-1">Full-Stack Developer</h3>
-            <p class="text-gray-400 mt-3">
-              Built real-time processing pipelines and interactive dashboards for enterprise clients.
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="tag-chip">Processed 1M+ events/day</span>
-              <span class="tag-chip">Reduced latency by 60%</span>
-              <span class="tag-chip">Won innovation award</span>
+          <article class="card-glass timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-badge timeline-badge--current">CURRENT</span>
+              <span class="timeline-date">Ongoing</span>
             </div>
-          </div>
+
+            <h3 class="timeline-role">Freelance Front-End Web Developer</h3>
+            <p class="timeline-company">Industrial Supply Corporate Website</p>
+
+            <ul class="timeline-bullets">
+              <li>Designing a responsive corporate website using HTML5, CSS, Tailwind CSS, and JavaScript.</li>
+              <li>Implementing staggered entrances, scroll reveals, dynamic hero effects, and mobile-first navigation.</li>
+              <li>Focused on performance optimization and clean, scalable CSS structure before deployment.</li>
+            </ul>
+
+            <div class="timeline-tags">
+              <span class="tag-chip">HTML5</span>
+              <span class="tag-chip">CSS</span>
+              <span class="tag-chip">Tailwind</span>
+              <span class="tag-chip">JavaScript</span>
+              <span class="tag-chip">UI/UX</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 3) Car Workshop (Left) -->
+      <div class="timeline-row">
+        <div class="timeline-card-wrap left">
+          <article class="card-glass timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-badge timeline-badge--current">CURRENT</span>
+              <span class="timeline-date">Ongoing</span>
+            </div>
+
+            <h3 class="timeline-role">Freelance Software Developer</h3>
+            <p class="timeline-company">Car Workshop</p>
+
+            <ul class="timeline-bullets">
+              <li>Developed a C# application to improve workshop efficiency and track mechanic productivity.</li>
+              <li>Implemented vehicle location tracking (bay, test drive, car wash) to monitor status.</li>
+              <li>Built reporting tools to analyze performance and workflow improvements.</li>
+            </ul>
+
+            <div class="timeline-tags">
+              <span class="tag-chip">C#</span>
+              <span class="tag-chip">Reporting</span>
+              <span class="tag-chip">Workflow</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="timeline-dot"></div>
+        <div class="timeline-card-wrap right"></div>
+      </div>
+
+      <!-- 4) Smaart Protective Wear (Right) -->
+      <div class="timeline-row">
+        <div class="timeline-card-wrap left"></div>
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-card-wrap right">
+          <article class="card-glass timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-badge">FREELANCE</span>
+              <span class="timeline-date">Jul 2024 – Sep 2024</span>
+            </div>
+
+            <h3 class="timeline-role">Freelance Software Developer</h3>
+            <p class="timeline-company">Smaart Protective Wear</p>
+
+            <ul class="timeline-bullets">
+              <li>Gathered requirements and built a payroll application using C# with SQL database management.</li>
+              <li>Implemented wage calculations, deductions, report generation, and pay slip printing.</li>
+              <li>Ensured accurate payroll records aligned to client specifications.</li>
+            </ul>
+
+            <div class="timeline-tags">
+              <span class="tag-chip">C#</span>
+              <span class="tag-chip">SQL</span>
+              <span class="tag-chip">Payroll</span>
+              <span class="tag-chip">Reports</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 5) Tantek (Left) -->
+      <div class="timeline-row">
+        <div class="timeline-card-wrap left">
+          <article class="card-glass timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-badge">FREELANCE</span>
+              <span class="timeline-date">Jun 2023 – Aug 2023</span>
+            </div>
+
+            <h3 class="timeline-role">Freelance Software Developer</h3>
+            <p class="timeline-company">Tantek</p>
+
+            <ul class="timeline-bullets">
+              <li>Worked with client to define scope and build a barcode generation + printing app.</li>
+              <li>Developed core functionality in C# with SQL storage for barcode data.</li>
+            </ul>
+
+            <div class="timeline-tags">
+              <span class="tag-chip">C#</span>
+              <span class="tag-chip">SQL</span>
+              <span class="tag-chip">Barcode</span>
+              <span class="tag-chip">Printing</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="timeline-dot"></div>
+        <div class="timeline-card-wrap right"></div>
+      </div>
+
+      <!-- 6) JKR Auto Center (Right) -->
+      <div class="timeline-row">
+        <div class="timeline-card-wrap left"></div>
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-card-wrap right">
+          <article class="card-glass timeline-card">
+            <div class="timeline-top">
+              <span class="timeline-badge timeline-badge--role">PART-TIME</span>
+              <span class="timeline-date">Jun 2019 – Nov 2019</span>
+            </div>
+
+            <h3 class="timeline-role">Admin Assistant</h3>
+            <p class="timeline-company">JKR Auto Center (Pty) Ltd</p>
+
+            <ul class="timeline-bullets">
+              <li>Updated website and business listings (Facebook, Google).</li>
+              <li>Assisted with filing and document organisation.</li>
+              <li>Supported customer logistics (pick-ups and drop-offs).</li>
+            </ul>
+
+            <div class="timeline-tags">
+              <span class="tag-chip">Admin</span>
+              <span class="tag-chip">Web Updates</span>
+              <span class="tag-chip">Customer Support</span>
+            </div>
+          </article>
         </div>
       </div>
 
@@ -360,60 +849,150 @@
 
     <!-- Contact -->
     <section id="contact" class="section reveal-on-scroll">
-      <div class="container">
-        <p class="section-eyebrow text-center">CONTACT</p>
-        <h2 class="section-title text-center">Let's Build Something <span class="text-cyan-400">Amazing</span></h2>
-        <p class="section-subtitle text-center">Have a project in mind? Let’s discuss how we can work together.</p>
+  <div class="container">
+    <p class="section-eyebrow text-center">CONTACT</p>
+    <h2 class="section-title text-center">Let's Build Something <span class="text-cyan-400">Amazing</span></h2>
+    <p class="section-subtitle text-center">Have a project in mind? Let’s discuss how we can work together.</p>
 
-        <div class="mt-12 grid md:grid-cols-2 gap-10">
-          <div class="card-glass p-8">
-            <h3 class="text-white font-semibold text-lg">Get in Touch</h3>
+    <div class="mt-12 grid md:grid-cols-2 gap-10">
+      <!-- Left: Contact Details -->
+      <div class="card-glass p-8">
+        <h3 class="text-white font-semibold text-lg">Get in Touch</h3>
+        <p class="text-gray-400 mt-2 text-sm leading-relaxed">
+          I’m open to freelance work, collaborations, and full-time opportunities.
+          Send a message and I’ll get back to you.
+        </p>
 
-            <div class="mt-6 space-y-4 text-gray-400">
-              <div class="contact-row">
-                <span class="contact-icon">✉</span>
-                <span>alex@portfolio.dev</span>
-              </div>
-              <div class="contact-row">
-                <span class="contact-icon">📍</span>
-                <span>San Francisco, CA</span>
-              </div>
-              <div class="contact-row">
-                <span class="contact-icon">📞</span>
-                <span>+1 (555) 123-4567</span>
-              </div>
-            </div>
-
-            <div class="mt-8 flex gap-2 flex-wrap">
-              <a class="social-btn" href="#" aria-label="GitHub">GitHub</a>
-              <a class="social-btn" href="#" aria-label="LinkedIn">LinkedIn</a>
-              <a class="social-btn" href="#" aria-label="Twitter">Twitter</a>
-            </div>
+        <div class="mt-6 space-y-4 text-gray-400">
+          <!-- Email -->
+          <div class="contact-row">
+            <span class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M4.5 7l7.5 6 7.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <a class="text-gray-400 hover:text-cyan-300 transition" href="mailto:keenanmunsamiii@gmail.com">
+              keenanmunsamiii@gmail.com
+            </a>
           </div>
 
-          <form class="card-glass p-8">
-            <div class="form-field">
-              <label class="form-label">Your Name</label>
-              <input class="form-input" type="text" placeholder="John Doe" />
-            </div>
+          <!-- Location -->
+          <div class="contact-row">
+            <span class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 10.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+            </span>
+            <span>South Africa</span>
+          </div>
 
-            <div class="form-field mt-4">
-              <label class="form-label">Your Email</label>
-              <input class="form-input" type="email" placeholder="john@example.com" />
-            </div>
+          <!-- Phone -->
+          <div class="contact-row">
+            <span class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 3h8v18H8V3Z" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M10 6h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M12 18h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <a class="text-gray-400 hover:text-cyan-300 transition" href="tel:+27794958251">
+              079 495 8251
+            </a>
+          </div>
+        </div>
 
-            <div class="form-field mt-4">
-              <label class="form-label">Your Message</label>
-              <textarea class="form-input h-28" placeholder="Tell me about your project..."></textarea>
-            </div>
+        <!-- Socials -->
+        <div class="mt-8 flex gap-2 flex-wrap">
+          <!-- LinkedIn -->
+          <a
+            class="social-btn inline-flex items-center gap-2"
+            href="https://www.linkedin.com/in/keenan-munsami-38813b160"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;">
+              <path d="M6.5 9.5V20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6.5 6.5h.01" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              <path d="M10 20v-6.2c0-2 1.2-3.3 3-3.3 1.9 0 3 1.3 3 3.3V20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M10 9.5V20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            LinkedIn
+          </a>
 
-            <button type="submit" class="btn-primary w-full mt-6">Send Message</button>
-          </form>
+          <!-- GitHub  -->
+          <a
+            class="social-btn inline-flex items-center gap-2"
+            href="#"
+            aria-label="GitHub"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" style="width:16px;height:16px;">
+              <path d="M9 19c-4 1.2-4-2-5-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M15 19v-2.3c0-.7.3-1.4.8-1.9 2.6-.3 5.2-1.3 5.2-6a4.7 4.7 0 0 0-1.3-3.3 4.2 4.2 0 0 0-.1-3.3s-1 .0-3.3 1.3a11.2 11.2 0 0 0-6.6 0C7.4 2.2 6.4 2.2 6.4 2.2a4.2 4.2 0 0 0-.1 3.3A4.7 4.7 0 0 0 5 8.8c0 4.7 2.6 5.7 5.2 6 .5.5.8 1.2.8 1.9V19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            GitHub
+          </a>
         </div>
       </div>
-    </section>
-  </main>
 
+      <!-- Right: Form -->
+      <form id="contactForm" class="card-glass p-8">
+        <h3 class="text-white font-semibold text-lg">Send a Message</h3>
+        <p class="text-gray-400 mt-2 text-sm">I’ll reply as soon as possible.</p>
+
+        <div class="form-field mt-6">
+          <label class="form-label" for="contactName">Your Name</label>
+          <input
+            id="contactName"
+            class="form-input"
+            type="text"
+            name="name"
+            placeholder="John Doe"
+            required
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="form-field mt-4">
+          <label class="form-label" for="contactEmail">Your Email</label>
+          <input
+            id="contactEmail"
+            class="form-input"
+            type="email"
+            name="email"
+            placeholder="john@example.com"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="form-field mt-4">
+          <label class="form-label" for="contactMessage">Your Message</label>
+          <textarea
+            id="contactMessage"
+            class="form-input h-28"
+            name="message"
+            placeholder="Tell me about your project..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary w-full mt-6">Send Message</button>
+        <p id="formStatus" class="mt-4 text-sm text-slate-400"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+  </main>
+</div>
   <!-- Scripts -->
   <script src="./js/app.js"></script>
 </body>
