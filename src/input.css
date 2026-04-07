@@ -1210,22 +1210,34 @@ body{
 }
 
 /* mobile */
-@media (max-width: 900px){
-  .timeline-row{
-    grid-template-columns: 38px 1fr; /* dot | card */
-    gap: 16px;
+@media (max-width: 900px) {
+ 
+  .timeline-row {
+    grid-template-columns: 40px 1fr !important; 
+    gap: 10px !important;
   }
-  .timeline-spine{
-    left: 19px;
-    transform: none;
+
+  
+  .timeline-spine {
+    left: 20px !important;
+    transform: none !important;
   }
-  .timeline-dot{
-    margin: 18px 0 0;
+  
+  .timeline-dot {
+    margin: 18px 0 0 11px !important; /* Align dot with spine */
   }
+
+  
   .timeline-card-wrap.left,
-  .timeline-card-wrap.right{
-    grid-column: 2 / -1;
-    justify-content: flex-start;
+  .timeline-card-wrap.right {
+    grid-column: 2 / -1 !important;
+    justify-content: flex-start !important; 
+    width: 100%;
+  }
+
+  .timeline-card {
+    width: 100% !important;
+    max-width: none !important;
   }
 }
 
