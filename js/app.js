@@ -31,10 +31,16 @@ const revealItems = document.querySelectorAll(".reveal-on-scroll");
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      // Change: Reveal as soon as 1% of the section is visible
+      // This prevents that "waiting" feeling
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        // Optimization: Stop watching the element once it is shown
+        revealObserver.unobserve(entry.target);
+      }
     });
   },
-  { threshold: 0.12 }
+  { threshold: 0.01, rootMargin: "0px 0px -50px 0px" } 
 );
 
 revealItems.forEach((el) => revealObserver.observe(el));
@@ -68,16 +74,16 @@ let width = 0;
 let height = 0;
 
 const baseConfig = {
-  maxDistance: 140,
+  maxDistance: 120,
   particleMinSize: 0.6,
-  particleMaxSize: 2.4,
-  lineOpacity: 0.08,
+  particleMaxSize: 2.0,
+  lineOpacity: 0.06,
   baseSpeed: 0.58,
   pulseSpeed: 0.008,
   // cap hard to prevent huge screen overload
-  minParticles: 90,
-  maxParticles: 150,
-  densityFactor: 14000 // higher means fewer particles
+  minParticles: 70,
+  maxParticles: 120,
+  densityFactor: 20000 // higher means fewer particles
 };
 
 const colors = [
@@ -98,6 +104,15 @@ function resizeCanvas() {
   canvas.height = Math.floor(height * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
+
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    initParticles();
+    updateTimelineCenterFill();
+  }, 200);
+}, { passive: true });
 
 function getResponsiveConfig() {
   const area = width * height;
@@ -251,32 +266,55 @@ function initParticles() {
 
 let lastTime = performance.now();
 
+
+let isScrolling = false;
+window.addEventListener('scroll', () => {
+  isScrolling = true;
+  clearTimeout(window.scrollTimer);
+  window.scrollTimer = setTimeout(() => { isScrolling = false; }, 100);
+}, { passive: true });
+
+let frameCount = 0;
+
+let scrollTimeout;
+
+window.addEventListener('scroll', () => {
+  isScrolling = true;
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => { isScrolling = false; }, 150);
+}, { passive: true });
+
 function animate(now = performance.now()) {
-  // 1) Delta time seconds since last frame, clamped to avoid big jumps
+  // 1) Delta time calculation
   const dt = Math.min(0.033, (now - lastTime) / 1000);
   lastTime = now;
+  frameCount++;
 
-  // 2) Compute responsive config (distance, particle count etc.)
   const cfg = getResponsiveConfig();
 
-  // 3) Keep particles synced with the latest config
-  for (const p of particles) p.cfg = cfg;
-
-  // 4) Fade the previous frame instead of hard-wiping to solid black
-  //    This keeps the "space depth" look and makes motion feel smooth.
-  ctx.fillStyle = "#000000";
+  // 2) Use a solid background color (Faster than transparency)
+  ctx.fillStyle = "#050510"; 
   ctx.fillRect(0, 0, width, height);
 
-  // 5) Draw the connecting lines first (behind particle cores)
-  drawConnections(cfg);
+  // 3) THE PERFORMANCE FIX:
+  // - On Mobile: Skip connections while scrolling.
+  // - On Desktop: Only draw connections every 3rd frame to save CPU.
+  const isMobile = width < 768;
+  
+  if (isMobile) {
+    if (!isScrolling) drawConnections(cfg);
+  } else {
+    // Desktop: Skip frames to keep the 'Main Thread' free for scroll reveals
+    if (frameCount % 3 === 0) drawConnections(cfg);
+  }
 
-  // 6) Update + draw particles (frame-rate independent)
+  // 4) Update + draw particles
   for (const p of particles) {
-    p.update(dt);   // IMPORTANT: your Particle.update must accept dt
+    p.update(dt);
     p.draw();
   }
 
-  // 7) Next frame
+  // 5) Request next frame
   requestAnimationFrame(animate);
 }
 
