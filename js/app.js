@@ -386,11 +386,20 @@ if (contactForm && formStatus) {
       if (res.ok) {
         formStatus.textContent = "Message sent. Thank you!";
         contactForm.reset();
-      } else {
+      } /*else {
         formStatus.textContent = "Failed to send. Please try again.";
       }
     } catch {
       formStatus.textContent = "Network error. Please try again.";
+    }
+  });
+}*/else {
+        // DEBUG: show actual error — remove after fixing
+        const errBody = await res.text();
+        formStatus.textContent = "Error " + res.status + ": " + errBody;
+      }
+    } catch (err) {
+      formStatus.textContent = "Network error: " + err.message;
     }
   });
 }
