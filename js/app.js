@@ -386,20 +386,11 @@ if (contactForm && formStatus) {
       if (res.ok) {
         formStatus.textContent = "Message sent. Thank you!";
         contactForm.reset();
-      } /*else {
+      } else {
         formStatus.textContent = "Failed to send. Please try again.";
       }
     } catch {
       formStatus.textContent = "Network error. Please try again.";
-    }
-  });
-}*/else {
-        // DEBUG: show actual error — remove after fixing
-        const errBody = await res.text();
-        formStatus.textContent = "Error " + res.status + ": " + errBody;
-      }
-    } catch (err) {
-      formStatus.textContent = "Network error: " + err.message;
     }
   });
 }
@@ -442,3 +433,144 @@ async function runTerminalTyping() {
 }
 
 runTerminalTyping();
+
+
+/*============================Projects Slider  =======================================*/
+(function () {
+  const SLIDE_INTERVAL = 2200;  // ms per slide while hovering
+  const RESTART_DELAY  = 400;   // ms after hover-out before resetting to slide 1
+
+  document.querySelectorAll(".project-card").forEach((card) => {
+    const track  = card.querySelector(".project-slider-track");
+    const slides = card.querySelectorAll(".project-slide");
+
+    if (!track || slides.length === 0) return;
+
+    const n = slides.length;
+
+    /* --- Set track + slide widths based on slide count --- */
+    track.style.width = `calc(${n} * 100%)`;
+    slides.forEach((s) => {
+      s.style.flex = `0 0 calc(100% / ${n})`;
+    });
+
+    /* --- Build dot indicators --- */
+    let dotsEl = card.querySelector(".project-dots");
+    if (!dotsEl) {
+      dotsEl = document.createElement("div");
+      dotsEl.className = "project-dots";
+      card.querySelector(".project-media").appendChild(dotsEl);
+    }
+    dotsEl.innerHTML = "";
+    const dotNodes = Array.from({ length: n }, (_, i) => {
+      const d = document.createElement("span");
+      d.className = "project-dot" + (i === 0 ? " is-active" : "");
+      dotsEl.appendChild(d);
+      return d;
+    });
+
+    /* --- State --- */
+    let current     = 0;
+    let timer       = null;
+    let resetTimer  = null;
+
+    function goTo(index) {
+      current = index;
+      // Each slide occupies (100 / n)% of the track width.
+      // To show slide i, shift track left by (i * 100 / n)% of its own width.
+      const pct = (100 / n) * current;
+      track.style.transform = `translateX(-${pct}%)`;
+      dotNodes.forEach((d, i) => d.classList.toggle("is-active", i === current));
+    }
+
+    function startSliding() {
+      if (timer) return;
+      timer = setInterval(() => {
+        goTo((current + 1) % n);
+      }, SLIDE_INTERVAL);
+    }
+
+    function stopSliding() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function resetToFirst() {
+      goTo(0);
+    }
+
+    /* --- Hover handlers --- */
+    card.addEventListener("mouseenter", () => {
+      clearTimeout(resetTimer);
+      startSliding();
+    });
+
+    card.addEventListener("mouseleave", () => {
+      stopSliding();
+      // Small delay so the user sees the last slide for a moment before reset
+      resetTimer = setTimeout(resetToFirst, RESTART_DELAY);
+    });
+
+    /* --- Init --- */
+    goTo(0);
+  });
+})();
+
+
+/* ========================================================================
+Education timeline
+
+=========================================================================== */
+(function () {
+  const modal      = document.getElementById("certModal");
+  const modalImg   = document.getElementById("certModalImg");
+  const modalTitle = document.getElementById("certModalTitle");
+  const closeBtn   = modal ? modal.querySelector(".cert-modal-close") : null;
+  const backdrop   = modal ? modal.querySelector(".cert-modal-backdrop") : null;
+
+  if (!modal) return;
+
+  /* ── Open ── */
+  function openModal(src, title) {
+    modalImg.src = src;
+    modalImg.alt = title;
+    modalTitle.textContent = title;
+
+    modal.removeAttribute("hidden");
+    modal.classList.add("is-open");
+
+    // Prevent background scroll
+    document.body.style.overflow = "hidden";
+
+    // Trap focus on close button
+    closeBtn && closeBtn.focus();
+  }
+
+  /* ── Close ── */
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("hidden", "");
+    document.body.style.overflow = "";
+
+    // Clear src after transition so there's no flash on next open
+    setTimeout(() => { modalImg.src = ""; }, 280);
+  }
+
+  /* ── Trigger: any .edu-cert-thumb button ── */
+  document.addEventListener("click", (e) => {
+    const thumb = e.target.closest(".edu-cert-thumb");
+    if (!thumb) return;
+
+    const src   = thumb.dataset.certSrc;
+    const title = thumb.dataset.certTitle || "Certificate";
+    if (src) openModal(src, title);
+  });
+
+  /* ── Close: backdrop click, close button, Escape key ── */
+  closeBtn  && closeBtn.addEventListener("click", closeModal);
+  backdrop  && backdrop.addEventListener("click", closeModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+})();
